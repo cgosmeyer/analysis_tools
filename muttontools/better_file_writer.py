@@ -56,7 +56,7 @@ def readcol(filename, datastart=1, comment='#', deliminator="\s+"):
 
     return cols,header
 
-cols,header= readcol('test.txt') 
+#cols,header= readcol('test.txt') 
 
 
 def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ', writer='a+', overwrite=False):
@@ -91,6 +91,6 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ', wri
 
     f.close()
 
-writecol('test2.txt', cols, header )
+#writecol('test2.txt', cols, header )
 
 
