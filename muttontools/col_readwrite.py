@@ -16,6 +16,8 @@ from __future__ import print_function
 import os
 import re
 
+#-----------------------------------------------------------------------------#
+
 def readcol(filename, datastart=1, comment='#', deliminator="\s+"):
     """
 
@@ -59,7 +61,10 @@ def readcol(filename, datastart=1, comment='#', deliminator="\s+"):
 #cols,header= readcol('test.txt') 
 
 
-def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ', writer='a+', overwrite=False):
+#-----------------------------------------------------------------------------#
+
+def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ', 
+    writer='a+', overwrite=False):
     """
     - have a check for overwriting. give user a warning?
     """

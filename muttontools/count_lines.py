@@ -9,9 +9,14 @@ import argparse
 import glob
 import os
 
+#-----------------------------------------------------------------------------#
 
 def count_code_lines(dir, ext):
     """
+
+    Future:
+    - should add option to print out number of comment lines
+    - option of comment line starter
 
     References:
     http://stackoverflow.com/questions/9076672/how-to-count-lines-of-code-in-python-excluding-comments-and-docstrings
@@ -62,7 +67,7 @@ def count_code_lines(dir, ext):
 
     print("Code lines in all scripts in directory {} are {}".format(dir, all_code_line_count) )
 
-
+#-----------------------------------------------------------------------------#
 
 def parse_args():
     """Parses command line arguments.
@@ -93,6 +98,8 @@ def parse_args():
 
     return args
 
+#-----------------------------------------------------------------------------#
+#-----------------------------------------------------------------------------#
 
 if __name__=='__main__':
 

@@ -19,7 +19,7 @@ from collections import OrderedDict
 
 #-----------------------------------------------------------------------------#
 
-def decompose_astropy_table(tab, return_type=list, include_meta=False):
+def decompose_table(tab, return_type=list, include_meta=False):
     """
     Breaks an Astropy Table into lists or ordered dictionaries.
 
@@ -74,11 +74,10 @@ def decompose_astropy_table(tab, return_type=list, include_meta=False):
 
 #-----------------------------------------------------------------------------#
 
-def build_astropy_table(columns, colnames, dtypes=[], meta={}):
+def build_table(columns, colnames, *args, **kwargs): 
     """
-    This should be a one-line function to build a non-complicated Table,
-    so I don't have to remember all the imports.
-    Can never remember 'names' parameter.
+    A one-line function to build a non-complicated Table.
+    Primarily written because I can never remember 'names' parameter.
 
     Parameters
     ----------
@@ -86,24 +85,13 @@ def build_astropy_table(columns, colnames, dtypes=[], meta={}):
         The lists are the columns corresponding to the column names.
     colnames : list
         The names of the columns.
-    dtypes : list
-        The data type of each column. Optional.
-    meta : dict
-        The meta data. Optional.
 
     Returns
     -------
     tab : Table
         Sparkly new Astropy Table.
     """
-    if meta != {} and dtypes != []:
-        tab = Table(columns, names=colnames, dtype=dtypes, meta=meta)
-    elif meta != {} and dtypes == []:
-        tab = Table(columns, names=colnames, meta=meta)        
-    elif meta == {} and dtypes != []:
-        tab = Table(columns, names=colnames, dtype=dtypes)
-    else:
-        tab = Table(columns, names=colnames)
+    tab = Table(columns, names=colnames, *args, **kwargs)
 
     return tab
 
@@ -112,7 +100,7 @@ def build_astropy_table(columns, colnames, dtypes=[], meta={}):
 
 def antitable(func):
     """ Decorator to be placed before any function that returns an Astropy
-    Table, using :func:`decompose_astropy_table`. Will convert that table 
+    Table, using :func:`decompose_table`. Will convert that table 
     into an OrderedDict.
 
     Use
@@ -133,8 +121,7 @@ def antitable(func):
     """
     def func_wrapper(*args, **kwargs):
         tab = func(*args, **kwargs)
-        print(type(tab))
-        ordered_dict = decompose_astropy_table(tab, return_type=dict)
+        ordered_dict = decompose_table(tab, return_type=dict)
         return ordered_dict
     return func_wrapper
 
