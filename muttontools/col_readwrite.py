@@ -13,18 +13,22 @@ Author:
 """
 
 from __future__ import print_function
+import numpy as np
 import os
 import re
 
 #-----------------------------------------------------------------------------#
 
-def readcol(filename, datastart=1, comment='#', deliminator="\s+"):
+def readcol(filename, headerstart=0, datastart=1, comment='#', 
+    deliminator="\s+"):
     """
 
     future improvements:
     - allow  user to pick to skip a comment line (if comes after datastart)
     - allow user to pick a deliminator 
+    - option to return a dictionary??
     """
+    print("reading {}".format(filename))
     cols = []
     f = open(filename, 'r')
 
@@ -33,28 +37,40 @@ def readcol(filename, datastart=1, comment='#', deliminator="\s+"):
         linestrip = re.split("\s+", line)
         while '' in linestrip:
             linestrip.remove('')
-        # Examine the first entry.
-        if i == datastart-1:
+        
+        # If there is a header, retrieve the column names.
+        if i == headerstart and headerstart != datastart:
             # Figure out how many columns and their names.
-            # For now assume first line contains header names.
             if linestrip[0] == '#':
                 ncols = len(linestrip)-1
                 linestrip.remove('#')
             else:
                 ncols = len(linestrip)
-            header = linestrip
-            cols = [[] for i in range(ncols)]
 
-        else:
-            for item, j in zip(linestrip, range(ncols)):
-                cols[j].append(item)
+            header = linestrip
+            cols = [[] for j in range(ncols)]
+            # Remove comment if first character.
+            if header[0][0] == '#':
+                header[0] = header[0][1:]
+
+        # If there is no header, just name the columns
+        # by number.
+        elif i == datastart and datastart == headerstart:
+            ncols = len(linestrip)
+            header = list(np.arange(ncols))
+            cols = [[] for j in range(ncols)]
+
+        elif i > datastart and linestrip != []:
+            if linestrip[0] != comment:
+                for item, j in zip(linestrip, range(ncols)):
+                    cols[j].append(item)
 
         i+=1
 
     f.close()
 
-    print(header)
-    print(cols)
+    #print(header)
+    #print(cols)
 
     return cols,header
 
