@@ -1,0 +1,6 @@
+% this is a custom comment line.
+# x y
+1 .1
+2 .2
+% this should not be read.
+3 .3
