@@ -13,6 +13,7 @@ Author:
 """
 
 from __future__ import print_function
+from __future__ import with_statement
 import numpy as np
 import os
 import re
@@ -30,100 +31,109 @@ def readcol(filename, headerstart=0, datastart=1, comment=' ',
     filename : str
         Name of the text file.
     headerstart : int 
-        The row of the header.
+        The row of the header. By default, row=0.
     datastart : int 
-         The row the data begins.
+         The row the data begins. By default, row=1
     comment : str
-         The character of comments, to be ignored when reading
-         columns.
+         The character denoting a comment line, to be ignored when reading
+         columns. By default nothing. 
     deliminator : str
-         The column divider. 
+         The column divider. By default, spaces or tabs. 
 
     Returns
     -------
 
     future improvements:
-    - allow  user to pick to skip a comment line (if comes after datastart)
-    - allow user to pick a deliminator 
     - option to return a dictionary??
+    - rewrite as class?
+    - how make fewer loops?? 
     """
     # Make sure file exists.
-    try:    
-        f = open(filename, 'r')
-        #lines = f.readlines()
+    #try:    
+    #    f = open(filename, 'r')
+    #except IOError:
+    #    print("File {} does not exist.".format(filename))
+    #    return [], []
+
+    #print("reading {}".format(filename))
+    cols = []
+    i = 0
+     
+    # Make sure that \t, \n, etc are still being split 
+    if deliminator != "\s+":
+        deliminator = '[' + deliminator + '\s\+]'
+
+    try: 
+        with open(filename, 'r') as f:
+            # not too happy with the with then for structure
+            # but better to use with so that file always is closed.
+            # how to return custom output if exception occurs? 
+            for line in f:
+
+                print("reading {}".format(filename))
+
+                print(line)
+                linestrip = re.split(deliminator, line)
+                while '' in linestrip:
+                    linestrip.remove('')
+                
+                print(i, headerstart, datastart)
+                print(linestrip)
+
+                # First test that line is not empty.
+                if linestrip != []:
+
+                    # Second test whether the first line is in fact
+                    # a custom comment.
+                    # If the user chooses to have a comment above the header,
+                    # and that header is denoted by the same comment marker,
+                    # it is on the user to choose correctly the 'headerstart'.
+
+                    if linestrip[0] != comment:
+
+                        # If there is a header, retrieve the column names.
+                        if i == headerstart and headerstart != datastart:
+                                # need to fix so that '#' is headercomment
+                                # Figure out how many columns and their names.
+                            if linestrip[0] == '#':
+                                ncols = len(linestrip)-1
+                                linestrip.remove('#')
+                            else:
+                                ncols = len(linestrip)
+                            print('ncols: {}'.format(ncols))
+                            header = linestrip
+                            cols = [[] for j in range(ncols)]
+
+                            # Remove comment if first character.
+                            if header[0][0] == '#':
+                                header[0] = header[0][1:]
+                            print("header: {}".format(header))
+
+                        # If there is no header, just name the columns
+                        # by number.
+                        elif i == datastart and datastart == headerstart:
+                            ncols = len(linestrip)
+                            header = list(np.arange(ncols))
+                            cols = [[] for j in range(ncols)]
+
+                        elif i >= datastart and linestrip != []:
+                            for item, j in zip(linestrip, range(ncols)):
+                                cols[j].append(item)
+                        i+=1
+
+        #f.close()
+
+        # Check whether the file was empty or no valid columns read.
+        if cols == []:
+            print("No valid columns found for file {}.".format(filename))
+            return [], []
+        else:
+            return cols, header
+
     except IOError:
         print("File {} does not exist.".format(filename))
         return [], []
 
-    print("reading {}".format(filename))
-    cols = []
-    i = 0
-    #line_iter = iter(lines)
-
-    #for line in line_iter:
-    for line in f:
-        linestrip = re.split(deliminator, line)
-        while '' in linestrip:
-            linestrip.remove('')
-        
-        print(i, headerstart, datastart)
-        print(linestrip)
-
-        # First test that line is not empty.
-        if linestrip != []:
-            #print('next, empty')
-
-            # Second test whether the first line is in fact
-            # a custom comment.
-            # If the user chooses to have a comment above the header,
-            # and that header is denoted by the same comment marker,
-            # it is on the user to choose correctly the 'headerstart'.
-
-            if linestrip[0] != comment:
-                #print('next')
-
-                # If there is a header, retrieve the column names.
-                if i == headerstart and headerstart != datastart:
-                    #if linestrip[0] != comment:
-                        # need to fix so that '#' is headercomment
-                        # Figure out how many columns and their names.
-                    if linestrip[0] == '#':
-                        ncols = len(linestrip)-1
-                        linestrip.remove('#')
-                    else:
-                        ncols = len(linestrip)
-                    print('ncols: {}'.format(ncols))
-                    header = linestrip
-                    cols = [[] for j in range(ncols)]
-                    # Remove comment if first character.
-                    if header[0][0] == '#':
-                        header[0] = header[0][1:]
-                    print("header: {}".format(header))
-                    #i+=1
-
-                # If there is no header, just name the columns
-                # by number.
-                elif i == datastart and datastart == headerstart:
-                    #if linestrip[0] != comment:
-                    ncols = len(linestrip)
-                    header = list(np.arange(ncols))
-                    cols = [[] for j in range(ncols)]
-                #i+=1
-
-                elif i >= datastart and linestrip != []:
-                    #if linestrip[0] != comment:
-                    for item, j in zip(linestrip, range(ncols)):
-                        cols[j].append(item)
-                i+=1
-
-    f.close()
-
-    # Check whether the file was empty or no valid columns read.
-    if cols == []:
-        print("No valid columns found for file {}.".format(filename))
-        return [], []
-    else:
-        return cols, header
 
 
 #-----------------------------------------------------------------------------#

@@ -1,5 +1,5 @@
 """
-Wraps numpy.where but makes it more IDL-like. 
+Modules for numpy.where to make it more IDL-like. 
 
 """
 
@@ -9,7 +9,7 @@ import numpy as np
 def andwhere(data, val1, test1, val2=None, test2=None, return_indices=False):
     """ Performs an 'and' where search, i.e., where(input > 3 and input < 4).
     Using the parameter names, where(data test1 val1 and data test2 val2).
-    Can also do a single test, i.e., where(inputs > 3).
+    Can also do a single test, i.e., where(input > 3).
 
     Example
     -------
@@ -39,6 +39,12 @@ def andwhere(data, val1, test1, val2=None, test2=None, return_indices=False):
 
     Returns
     -------
+    If 'return_indices' is False,
+    data_cut<1/2> : array
+        The 'data' array cut down by the testing parameters.
+    If 'return_indices' is True:
+        The index array of 'data' corresponding to items cut down by the
+        testing parameters.
 
     """
     # Transform the list to numpy array.

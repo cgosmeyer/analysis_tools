@@ -72,7 +72,8 @@ def count_code_lines(dir, ext):
 def parse_args():
     """Parses command line arguments.
     
-    Parameters:
+    Parameters
+    
         nothing
         
     Returns:
