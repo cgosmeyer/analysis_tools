@@ -6,10 +6,11 @@ Use:
 
     >>> nosetests
 
-Test directory includes the test files:
+Can be made part of git pre-commit hook, living in .git/hooks/pre-commit-nosetests
 
-    *
-    *
+References:
+
+http://offbytwo.com/2008/05/22/running-nosetests-as-a-git-pre-commit-hook.html
 """
 
 import os

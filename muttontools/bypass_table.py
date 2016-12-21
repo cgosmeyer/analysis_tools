@@ -106,7 +106,8 @@ def antitable(func):
     Use
     ---
         @antitable
-        function_creating_table(args)
+        out = function_creating_table(args)
+        # 'out' is an OrderedDict
 
     Parameters
     ----------
