@@ -49,6 +49,8 @@ def test_can_read_single_column_file():
 def test_can_read_no_header():
     assert readcol(filename='test_files/noheader.txt', headerstart=0, datastart=0) == (['0', '1'], [['1', '2', '3', '4'], ['.1', '.2', '.3', '.4']])
 
+def test_break():
+    assert readcol(filename='nothere.txt') == ([], [])
 
 # Tests for writecol
 
