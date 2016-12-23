@@ -19,10 +19,9 @@ from nose.tools import *
 from IPython.utils.capture import capture_output
 
 import os
-import sys
-
 
 abs_path = os.path.split(os.path.abspath(__file__))[0]
+
 
 # Tests for readcol
 
