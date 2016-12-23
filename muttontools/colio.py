@@ -171,9 +171,6 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
         Meant as a dummy-proof in case you didn't enter the 'writer' you
         intended.
 
-    Returns
-    -------
-
     """
 
     # Check for overwriting
@@ -208,6 +205,7 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
 
     with open(filename, writer) as f:
 
+        # Write a header if one given.
         if header != []:
             headerline = headerstarter
             for j in range(ncols):
@@ -217,7 +215,7 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
                     headerline += header[j] + deliminator 
             f.write(headerline)
 
-
+        # Write each sublist as a column.
         for i in range(nrows):
             line = ''
             for j in range(ncols):
