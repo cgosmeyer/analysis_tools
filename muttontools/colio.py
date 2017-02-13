@@ -220,9 +220,9 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
             line = ''
             for j in range(ncols):
                 if j == ncols-1:
-                    line += data[j][i] + '\n'
+                    line += str(data[j][i]) + '\n'
                 else:
-                    line += data[j][i] + deliminator
+                    line += str(data[j][i]) + deliminator
             
             f.write(line)
 
