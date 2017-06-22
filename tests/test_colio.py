@@ -14,7 +14,7 @@ http://offbytwo.com/2008/05/22/running-nosetests-as-a-git-pre-commit-hook.html
 """
 
 from __future__ import print_function
-from muttontools.colio import readcol, writecol
+from analysis_tools.colio import readcol, writecol
 from nose.tools import *
 from IPython.utils.capture import capture_output
 
