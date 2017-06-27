@@ -1,5 +1,5 @@
 # analysis_tools
-Various io, file-handling, etc. tools for astronomical analysis work. 
+Various io, FITS file-handling, conversion, etc. tools for astronomical analysis work. 
 
 ## convert
 Time and unit conversions, often just wrapping `astropy` functions in a format I can better remember. 
