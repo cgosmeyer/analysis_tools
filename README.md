@@ -24,7 +24,7 @@ Modules for handling FITS files. Many of these can be not only imported, but als
 Miss IDL's `readcol` and `writecol`?  Try `io.readcol` and `io.writecol`.  
 You can set the line number (not counting blank lines) that a header begins and the data begins. For funzies, I wrotes `nosetests` in the "tests" directory for these functions. 
 
-# jitter
+## jitter
 Some plotting and analysis scripts for the `JIF` and `JIT` engineering FITS files for the HST/WFC3 instrument. 
 
 ## tables
