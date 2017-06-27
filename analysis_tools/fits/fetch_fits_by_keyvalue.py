@@ -14,7 +14,7 @@ Use:
     
 Example: 
 
-    >>> python fetch_fits_by_keyvalue.py 'F547M' 'FILTER' 'flt' '/grp/hst/wfc3/cgosmeyer/tests/' '.'
+    >>> python fetch_fits_by_keyvalue.py 'F547M' 'FILTER' 'flt' '/your/path/here/' '.'
 
 Notes:
 
