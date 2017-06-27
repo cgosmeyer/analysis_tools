@@ -22,7 +22,7 @@ Modules for handling FITS files. Many of these can be not only imported, but als
 
 ## io
 Miss IDL's `readcol` and `writecol`?  Try `io.readcol` and `io.writecol`.  
-You can set the line number (not counting blank lines) that a header begins and the data begins. For funzies, I wrotes `nosetests` in the "tests" directory for these functions. 
+You can set the line number (not counting blank lines) that a header begins and the data begins. For funzies, I wrote `nosetests` in the "tests" directory for these functions. 
 
 ## jitter
 Some plotting and analysis scripts for the `JIF` and `JIT` engineering FITS files for the HST/WFC3 instrument. 
@@ -34,7 +34,7 @@ Ready to burn `astropy.table`?  In `tables.bybass_table` find the functions
 
 * `build_table`, which takes columns and column names and creates an `astropy.table.Table` because I can never remember the `astropy` syntax (and that "names" is really "colnames", ugh).  
 
-* `antitable`, which is actually a decorator wrapping `decompose_table`. For any function returning an `astropy.table.Table`, use the dectorator to convert it to a `collections.OrderedDict`.  Mostly for funzies. 
+* `antitable`, which is actually a decorator wrapping `decompose_table`. For any function returning an `astropy.table.Table`, use the dectorator to convert it to a `collections.OrderedDict`. For funzies. 
 
 ```
     @antitable
