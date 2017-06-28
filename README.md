@@ -4,6 +4,11 @@ Various io, FITS file-handling, conversion, etc. tools for astronomical analysis
 ## convert
 Time and unit conversions, often just wrapping `astropy` functions in a format I can better remember. 
 
+## dir
+Modules for handling directories. 
+
+* `make_timestamp_dir` will create a directory that is "time-stamped" to the current time as YYYY.MM.DD.
+
 ## fits
 Modules for handling FITS files. Many of these can be not only imported, but also executed on the command line.
 ```
@@ -26,6 +31,9 @@ You can set the line number (not counting blank lines) that a header begins and 
 
 ## jitter
 Some plotting and analysis scripts for the `JIF` and `JIT` engineering FITS files for the HST/WFC3 instrument. 
+
+## Statistics
+Statistics is probably too dignified of a word for what's in here. For taking means, clipping, errors, and such. 
 
 ## tables
 Ready to burn `astropy.table`?  In `tables.bybass_table` find the functions
