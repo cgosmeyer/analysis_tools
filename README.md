@@ -32,7 +32,7 @@ You can set the line number (not counting blank lines) that a header begins and 
 ## jitter
 Some plotting and analysis scripts for the `JIF` and `JIT` engineering FITS files for the HST/WFC3 instrument. 
 
-## Statistics
+## statistics
 Statistics is probably too dignified of a word for what's in here. For taking means, clipping, errors, and such. 
 
 ## tables
