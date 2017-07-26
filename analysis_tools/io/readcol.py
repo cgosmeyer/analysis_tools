@@ -19,7 +19,7 @@ import sys
 #-----------------------------------------------------------------------------#
 
 def readcol(filename, headerstart=0, datastart=1, comment=' ', 
-    deliminator="\s+"):
+    delimiter="\s+"):
     """ Reads the columns of a text file. Returns the columns as a 
     list of list and the header as a list.
 
@@ -34,7 +34,7 @@ def readcol(filename, headerstart=0, datastart=1, comment=' ',
     comment : str
          The character denoting a comment line, to be ignored when reading
          columns. By default nothing. 
-    deliminator : str
+    delimiter : str
          The column divider. By default, spaces or tabs. 
 
     Returns
@@ -68,8 +68,8 @@ def readcol(filename, headerstart=0, datastart=1, comment=' ',
             row_count = 0
 
             # Make sure that \t, \n, etc will still be split out.
-            if deliminator != "\s+":
-                deliminator = '[' + deliminator + '\s\+]'
+            if delimiter != "\s+":
+                delimiter = '[' + delimiter + '\s\+]'
 
             # not too happy with the with then for structure
             # but better to use with so that file always is closed.
@@ -77,8 +77,8 @@ def readcol(filename, headerstart=0, datastart=1, comment=' ',
             for line in f:
 
                 # Change line into list of entires, split by the 
-                # deliminator.
-                linestrip = re.split(deliminator, line)
+                # delimiter.
+                linestrip = re.split(delimiter, line)
 
                 # Remove all empty strings.
                 while '' in linestrip:

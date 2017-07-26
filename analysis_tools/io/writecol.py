@@ -17,7 +17,7 @@ import sys
 
 #-----------------------------------------------------------------------------#
 
-def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ', 
+def writecol(filename, data, header=[], delimiter=' ', headerstarter='# ', 
     writer='a+', overwrite=False):
     """ Write the a list of lists into a text file, where each sublist is 
     a column. 
@@ -31,7 +31,7 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
         all be the same length.
     header : list
         Optional. The names of the columns.
-    deliminator : str
+    delimiter : str
         Optional. How to divide the columns. A single space by default.
     headerstarter : str
         Optional. String with which to start a header. '#' by default.
@@ -84,7 +84,7 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
                 if j == ncols-1:
                     headerline += header[j] + '\n'
                 else:
-                    headerline += header[j] + deliminator 
+                    headerline += header[j] + delimiter 
             f.write(headerline)
 
         # Write each sublist as a column.
@@ -94,7 +94,7 @@ def writecol(filename, data, header=[], deliminator=' ', headerstarter='# ',
                 if j == ncols-1:
                     line += str(data[j][i]) + '\n'
                 else:
-                    line += str(data[j][i]) + deliminator
+                    line += str(data[j][i]) + delimiter
             
             f.write(line)
 
